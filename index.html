@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>geometrical dash</title>
+<style>
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+text-align: center;
+background-color: #0078d7; /* Agreed change: Windows Blue */
+color: white;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+height: 100vh;
+margin: 0;
+}
+
+
+/* The Button to "enable" audio for the prank */
+#start-btn {
+padding: 15px 30px;
+font-size: 20px;
+cursor: pointer;
+background: #ffffff; /* Agreed change: White button */
+color: #0078d7; /* Agreed change: Blue text */
+border: none;
+border-radius: 5px;
+}
+
+
+/* Fullscreen containers for the pranks */
+.prank-overlay {
+display: none;
+position: fixed;
+top: 0; left: 0;
+width: 100vw; height: 100vh;
+background: black;
+z-index: 9999;
+justify-content: center;
+align-items: center;
+}
+
+
+video, img {
+max-width: 100%;
+max-height: 100%;
+}
+
+/* Agreed change: Windows-style loader */
+.loader {
+  width: 50px; height: 50px;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%; border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+  margin: 20px auto;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+
+<div id="main-content">
+<h1>cube run</h1> <!-- Agreed change: Update text -->
+<button id="start-btn">dash</button> <!-- Agreed change: Update button -->
+</div>
+
+
+<div id="rickroll-overlay" class="prank-overlay">
+<video id="rick-video" playsinline>
+<source src="https://shattereddisk.github.io/rickroll/rickroll.mp4" type="video/mp4">
+</video>
+</div>
+
+
+<div id="custom-overlay" class="prank-overlay">
+<img src="https://drive.google.com/file/d/1gQUWNnSiq4y2_67yuxStxZ8-wg-UAxMM/view?usp=drive_link" alt="Custom Prank">
+
+</div>
+
+
+<script>
+const startBtn = document.getElementById('start-btn');
+const rickOverlay = document.getElementById('rickroll-overlay');
+const rickVideo = document.getElementById('rick-video');
+const customOverlay = document.getElementById('custom-overlay');
+
+
+startBtn.addEventListener('click', () => {
+/* Agreed change: Computer updating screen content */
+document.getElementById('main-content').innerHTML = `
+    <div class="loader"></div>
+    <h1>Working on updates</h1>
+    <p>12% complete</p>
+    <p style="font-size: 14px;">Don't turn off your PC. This will take a while.</p>
+`;
+startLoop();
+});
+
+
+function startLoop() {
+// 1. Wait 5 seconds
+setTimeout(() => {
+showRickroll();
+}, 500);
+}
+
+
+function showRickroll() {
+rickOverlay.style.display = 'flex';
+rickVideo.currentTime = 0;
+rickVideo.play();
+
+
+// 2. Show for 5 seconds, then hide
+setTimeout(() => {
+rickOverlay.style.display = 'none';
+rickVideo.pause();
+
+
+// 3. Wait 5 seconds, then show the image
+setTimeout(() => {
+showCustomImage();
+}, 500);
+}, 1000);
+}
+
+
+function showCustomImage() {
+customOverlay.style.display = 'flex';
+
+
+// 4. Show for 5 seconds, then hide
+setTimeout(() => {
+customOverlay.style.display = 'none';
+
+
+// 5. Restart the loop (Wait 5s then Rickroll again)
+startLoop();
+}, 1500);
+}
+</script>
+
+
+</body>
+</html>
+
+
+
+
